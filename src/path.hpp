@@ -27,6 +27,8 @@ inline extern bool isExist(const std::filesystem::path &path
     , std::filesystem::file_type type = std::filesystem::file_type::regular)
     {return type == std::filesystem::status(path).type();}
 
+extern bool outFileError(const std::filesystem::path&);
+
 }
 
 #endif

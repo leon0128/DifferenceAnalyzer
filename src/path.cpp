@@ -1,6 +1,7 @@
 #include "path.hpp"
 
 #include <filesystem>
+#include <iostream>
 
 namespace PATH
 {
@@ -25,6 +26,15 @@ bool isValid(const std::filesystem::path &path
     }
     else
         return false;
+}
+
+bool outFileError(const std::filesystem::path &path)
+{
+    std::cerr << "file error:\n"
+        "    what: failed to operate file or directory.\n"
+        "    path: " << path.string()
+        << std::endl;
+    return false;
 }
 
 }
