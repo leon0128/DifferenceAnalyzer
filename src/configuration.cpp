@@ -23,7 +23,7 @@ bool Configuration::loadJson()
         {boost::property_tree::read_json(mConfigurationPath, ptree);}
     catch(const std::exception &e)
     {
-        std::cerr << "loadJson() error:\n"
+        std::cerr << "Configuration::loadJson() error:\n"
             "    what: " << e.what() << "\n"
             "    path: " << mConfigurationPath.string()
             << std::endl;
@@ -51,7 +51,7 @@ bool Configuration::loadJson()
         return true;
     else
     {
-        std::cerr << "loadJson() error:\n"
+        std::cerr << "Configuration::loadJson() error:\n"
             "    what: failed to get some value.\n"
             "    path: " << mConfigurationPath.string()
             << std::endl;
