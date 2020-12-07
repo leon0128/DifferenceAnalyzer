@@ -1,0 +1,7 @@
+{
+    "output_dir": "./output/",
+    "scanning_paths":
+    [
+        "./../Collector/difference/test/"
+    ]
+}
