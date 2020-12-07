@@ -15,20 +15,26 @@ bool Configuration::initialize()
 
 bool Configuration::loadJson()
 {
-    if(!PATH::isExist(mScanningPathFile))
-        return PATH::outFileError(mScanningPathFile);
+    if(!PATH::isExist(mConfigurationPath))
+        return PATH::outFileError(mConfigurationPath);
 
     boost::property_tree::ptree ptree;
     try
-        {boost::property_tree::read_json(mScanningPathFile, ptree);}
+        {boost::property_tree::read_json(mConfigurationPath, ptree);}
     catch(const std::exception &e)
     {
         std::cerr << "loadJson() error:\n"
             "    what: " << e.what() << "\n"
-            "    path: " << mScanningPathFile.string()
+            "    path: " << mConfigurationPath.string()
             << std::endl;
         return false;
     }
+
+    bool isValid = true;
+    if(auto opt = ptree.get_optional<std::string>(mOutputDirKey); opt)
+        mOutputDir = opt.get();
+    else
+        isValid = false;
 
     if(auto optarr = ptree.get_child_optional(mScanningPathsKey); optarr)
     {
@@ -38,7 +44,17 @@ bool Configuration::loadJson()
                 mScanningPaths.emplace_back(opt.get());
         }
     }
-    
+    else
+        isValid = false;
 
-    return true;
+    if(isValid)
+        return true;
+    else
+    {
+        std::cerr << "loadJson() error:\n"
+            "    what: failed to get some value.\n"
+            "    path: " << mConfigurationPath.string()
+            << std::endl;
+        return false;
+    }
 }
