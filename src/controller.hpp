@@ -8,10 +8,6 @@ public:
 
     bool initialize();
     bool execute();
-
-private:
-    
-
 };
 
 #endif

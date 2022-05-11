@@ -2,6 +2,6 @@
     "output_dir": "./output/",
     "scanning_paths":
     [
-        "./../Collector/difference/test/"
+        "./../Collector/difference/wled/"
     ]
 }

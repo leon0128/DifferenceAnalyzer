@@ -36,7 +36,7 @@ bool Configuration::loadJson()
     else
         isValid = false;
 
-    if(auto optarr = ptree.get_child_optional(mScanningPathsKey); optarr)
+    if(auto &&optarr = ptree.get_child_optional(mScanningPathsKey); optarr)
     {
         for(auto &&c : optarr.get())
         {
